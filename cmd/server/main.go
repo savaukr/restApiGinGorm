@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 	"github.com/savaukr/restApiGinGorm/pkg/config"
-	"go.uber.org/zap"
+	// "go.uber.org/zap"
 	// "gorm.io/gorm"
 	// "gorm.io/driver/postgres"
 	"github.com/savaukr/restApiGinGorm/database"
+	"github.com/savaukr/restApiGinGorm/handlers"
 
-
-	"github.com/gin-gonic/gin"
+	// "github.com/gin-gonic/gin"
 
 )
 
@@ -38,14 +38,9 @@ func main() {
 	db:= database.Init()
 	fmt.Printf("db = %+v\n", db)
 
-
 	//routers
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	r.GET("/ping", handlers.Ping)
 	
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
