@@ -6,6 +6,8 @@ import (
 	"go.uber.org/zap"
 	// "gorm.io/gorm"
 	// "gorm.io/driver/postgres"
+	"github.com/savaukr/restApiGinGorm/database"
+
 
 	"github.com/gin-gonic/gin"
 

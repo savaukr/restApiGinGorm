@@ -1,7 +1,8 @@
 package database
 
 import (
-	"github.com/savaukr/restApiGinGorm/database"
+	"go.uber.org/zap"
+	"github.com/savaukr/restApiGinGorm/model"
 	"gorm.io/gorm"
 	"gorm.io/driver/postgres"
 	"time"
@@ -20,6 +21,8 @@ func Init() *gorm.DB {
 	if err != nil {
 		logger.Fatalw("failed to connetc to DB", "err", err)
 	}
+	db.AutoMigrate(&model.Users{}, &model.Messages{})
+	logger.Infow("connected to DB ...")
 	return db
 }
 
