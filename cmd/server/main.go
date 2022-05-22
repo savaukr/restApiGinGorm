@@ -3,13 +3,12 @@ package main
 import (
 	"fmt"
 	"github.com/savaukr/restApiGinGorm/pkg/config"
-	// "go.uber.org/zap"
+	"go.uber.org/zap"
 	// "gorm.io/gorm"
 	// "gorm.io/driver/postgres"
 	"github.com/savaukr/restApiGinGorm/database"
 	"github.com/savaukr/restApiGinGorm/handlers"
-
-	// "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 
 )
 

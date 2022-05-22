@@ -10,6 +10,8 @@ type Config struct {
 
 func NewConfig() (*Config, error) {
 	var s Config
+	s.HttpAddr = "8081"
+	s.DBAddr = "host=localhost user=sl password=1111 dbname=messages port=5432 sslmode=disable TimeZone=Asia/Shanghai"
     err := envconfig.Process("RAGG", &s)
     if err != nil {
         return nil, err
