@@ -26,7 +26,6 @@ func Init() *gorm.DB {
 		logger.Fatalw("failed to parse config", "err", err)
 	}
 
-	// dns := "host=localhost user=sl password=1111 dbname=messages port=5432 sslmode=disable"
 	db, err := gorm.Open(postgres.Open(cfg.DBAddr), &gorm.Config{})
 	if err != nil {
 		logger.Fatalw("failed to connetc to DB", "err", err)

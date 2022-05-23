@@ -9,7 +9,7 @@ import (
 
 type Config struct {
 	HttpAddr string `default: ":8080"`
-	DBAddr string `default: "host=localhost user=postgres password= dbname=messages port=5432 sslmode=disable"`
+	DBAddr string 
 
 }
 

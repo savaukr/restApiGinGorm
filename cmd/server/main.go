@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"github.com/savaukr/restApiGinGorm/pkg/config"
 	"go.uber.org/zap"
-	// "gorm.io/gorm"
-	// "gorm.io/driver/postgres"
+
 	"github.com/savaukr/restApiGinGorm/database"
 	"github.com/savaukr/restApiGinGorm/handlers"
 	"github.com/gin-gonic/gin"
@@ -25,24 +24,23 @@ func main() {
 	}
 	fmt.Printf("cfg = %+v\n", cfg)
 
-
-	// dns := "host=localhost user=sl password=1111 dbname=messages port=5432 sslmode=disable TimeZone=Asia/Shanghai"
-	// // db, err := gorm.Open(postgres.Open(cfg.DBAddr), &gorm.Config{})
-	// db, err := gorm.Open(postgres.Open(dns), &gorm.Config{})
-
-	// if err != nil {
-	// 	logger.Fatalw("failed to connetc to DB", "err", err)
-	// }
-
 	db:= database.Init()
 	fmt.Printf("db = %+v\n", db)
 
 	//routers
 	r := gin.Default()
-	r.GET("/ping", handlers.Ping)
-	r.GET("/message", handlers.GetMessage)
+
+	r.GET("/message/:id", handlers.GetMessage)
 	r.GET("/messages", handlers.GetMessages)
 	r.POST("/message", handlers.SaveMessage)
+	r.DELETE("./message/:id", handlers.DeleteMessage)
+	r.PUT("./message/:id", handlers.UpdateMessage)
+
+	r.GET("/users/:id", handlers.GetUser)
+	r.GET("/users", handlers.GetUsers)
+	r.POST("/users", handlers.SaveUser)
+	r.DELETE("./users/:id", handlers.DeleteUser)
+	r.PUT("./users/:id", handlers.UpdateUser)
 	
 	r.Run(cfg.HttpAddr) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
