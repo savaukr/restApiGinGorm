@@ -2,22 +2,32 @@ package database
 
 import (
 	"go.uber.org/zap"
+
 	"github.com/savaukr/restApiGinGorm/models"
+	"github.com/savaukr/restApiGinGorm/pkg/config"
+
 	"gorm.io/gorm"
 	"gorm.io/driver/postgres"
 	"time"
 	"fmt"
+	
 )
 
-var dbase *gorm.DB
+var dbase  *gorm.DB
 
 func Init() *gorm.DB {
+
 	prdLogger, _ := zap.NewProduction()
 	defer prdLogger.Sync()
 	logger := prdLogger.Sugar()
 
-	dns := "host=localhost user=sl password=1111 dbname=messages port=5432 sslmode=disable"
-	db, err := gorm.Open(postgres.Open(dns), &gorm.Config{})
+	cfg, err := config.NewConfig()
+	if err != nil {
+		logger.Fatalw("failed to parse config", "err", err)
+	}
+
+	// dns := "host=localhost user=sl password=1111 dbname=messages port=5432 sslmode=disable"
+	db, err := gorm.Open(postgres.Open(cfg.DBAddr), &gorm.Config{})
 	if err != nil {
 		logger.Fatalw("failed to connetc to DB", "err", err)
 	}

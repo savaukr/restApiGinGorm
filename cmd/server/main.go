@@ -40,8 +40,11 @@ func main() {
 	//routers
 	r := gin.Default()
 	r.GET("/ping", handlers.Ping)
+	r.GET("/message", handlers.GetMessage)
+	r.GET("/messages", handlers.GetMessages)
+	r.POST("/message", handlers.SaveMessage)
 	
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	r.Run(cfg.HttpAddr) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
 	
 }
